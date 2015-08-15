@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rspec-rails'
 gem 'omniauth-venmo'
+gem 'attr_encrypted'
 
 
 # Use ActiveModel has_secure_password
@@ -23,7 +24,8 @@ gem 'omniauth-venmo'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'byebug'
+  gem 'pry-byebug'
+  gem 'capybara'
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
