@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#main-page {
+  display:table;
+  overflow:hidden;
+  margin:0px auto;
+}
+
+#content-container {
+  display:table-cell;
+  vertical-align: middle;
+}
+
+html,body {
+  height:100%;
+}
+#main-page {
+  height:100%;
+  width:465px;
+}
+
+#find-place {
+  float: right;
+}
+
