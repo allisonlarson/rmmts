@@ -1,1 +1,6 @@
-<%= @current_user.name %>
+Welcome <%= @current_user.name %>
+<% if @current_user.accounts.first %>
+  <%= @current_user.accounts.first.provider %>
+<% else %>
+  <a href='/auth/venmo'>Login with Venmo</a>
+<% end %>

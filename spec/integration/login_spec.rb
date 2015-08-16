@@ -1,25 +1,33 @@
 require 'rails_helper'
 RSpec.describe "User can login", type: :feature do
-  before do
-    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:venmo]
-  end
 
-  context "new user" do
-    it "creates a user" do
+  context "valid user" do
+    before do
+      User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password")
+    end
+
+    it "logs in" do
       visit '/'
       click_on 'Login'
-      expect(page).to have_content 'Test User'
+      fill_in 'email', with: "test@test.com"
+      fill_in 'password', with: "password"
+      click_button "Login"
+
+      expect(page).to have_content 'Welcome Test User'
     end
   end
 
-  context "existing user" do
-    before { User.create!(name: "Existing User", uid: OmniAuth.config.mock_auth[:venmo][:uid]) }
-
-    it "finds exisiting user" do
+  context "invalid user" do
+    it "returns an error" do
       visit '/'
       click_on 'Login'
-      expect(page).to have_content 'Existing User'
-      expect(page).to_not have_content 'Test User'
+      fill_in 'email', with: "Test User"
+      fill_in 'password', with: "Password"
+      click_button "Login"
+
+      expect(page).to_not have_content 'Welcome Test User'
     end
   end
+
+
 end

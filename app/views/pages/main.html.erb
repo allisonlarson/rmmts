@@ -1,6 +1,6 @@
 <div id="main-header">
   <div id="find-place">
-    <button>Login</button>
+    <%= link_to "Login", '/login', class:"btn" %>
   </div>
 </div>
 <div id="main-page">
@@ -8,7 +8,7 @@
     <div id="content">
       <h1>Rmmts</h1>
       <input type="text"></input>
-      <button type="submit">Get Started</button>
+      <%= link_to "Get Started", new_user_path, class:"btn" %>
     </div>
   </div>
 </div>
