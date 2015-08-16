@@ -25,6 +25,7 @@ gem 'attr_encrypted'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'shoulda-matchers'
   gem 'capybara'
   gem 'web-console', '~> 2.0'
   gem 'spring'

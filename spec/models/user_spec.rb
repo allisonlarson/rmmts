@@ -1,5 +1,7 @@
 require 'rails_helper'
 RSpec.describe User do
+  it { should belong_to(:society) }
+
   context "a valid user" do
     it "has an encrypted access token" do
       user = User.create!(access_token: "12345")

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_encrypted :access_token, key: ENV['TOKEN_KEY']
+  belongs_to :society
 
   def self.find_or_create_from_omniauth(omniauth_hash)
     where(uid: omniauth_hash[:uid]).first_or_create do |user|
