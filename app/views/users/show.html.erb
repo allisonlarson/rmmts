@@ -7,7 +7,7 @@
       <h2 class="balance-amt">$XX.XX</h2>
       <button class="pay-now-btn">Pay Now</button>
     </div>
-    <button class="logout">Logout</button>
+    <%= link_to "Logout", logout_path, class: "btn" %>
   </div>
 
   <div class="main-content">
@@ -20,23 +20,27 @@
     </div>
 
     <div class="content">
-      <button class="add-account-btn">Add New</button>
+      <a href="/auth/venmo" class="btn add-account-btn">Link Venmo Account</a>
       <div class="payment-accounts">
-        <h3 class="account-name"><%= current_user.accounts.first.provider %></h3>
-        <table class="account-table">
-          <tr>
-            <td>Name</td>
-            <td>XXXX</td>
-            <td><button>Unlink</button></td>
-          </tr>
-        </table>
+        <% current_user.accounts.each do |account| %>
+          <div class="payment-account">
+            <h3 class="account-name"><%= account.provider %></h3>
+            <table class="payment-account-table">
+              <tr>
+                <td>Name</td>
+                <td>XXXX</td>
+                <td><%= link_to "Unlink", user_account_path(current_user, account), method: "DELETE", class:"btn" %></td>
+              </tr>
+            </table>
+          </div>
+        <% end %>
       </div>
       <div class="account-settings">
         <h3>Account Settings</h3>
-        <table>
+        <table class="account-table">
           <tr>
             <td>I'm done with this</td>
-            <td><button>Delete Account</button></td>
+            <td><%= link_to "Delete Account", user_path(current_user), method: "DELETE", class: "btn" %></td>
           </tr>
         </table>
       </div>

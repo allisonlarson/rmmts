@@ -12,7 +12,7 @@ RSpec.describe "User can sign-up", type: :feature do
       fill_in 'user[password_confirmation]', with: "password"
       click_button "Create User"
 
-      expect(page).to have_content 'Welcome Test User'
+      expect(page).to have_content 'Test User'
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe "User can sign-up", type: :feature do
       fill_in 'user[password_confirmation]', with: "password"
       click_button "Create User"
 
-      expect(page).to_not have_content 'Welcome Test User'
+      expect(page).to_not have_content 'Test User'
     end
   end
 end

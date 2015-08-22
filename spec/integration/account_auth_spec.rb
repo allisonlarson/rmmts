@@ -9,10 +9,15 @@ RSpec.describe "User can authorize account", type: :feature do
     fill_in 'email', with: "test@test.com"
     fill_in 'password', with: "password"
     click_button "Login"
+    click_on "Link Venmo Account"
   end
 
   it "creates an account" do
-    click_on "Login with Venmo"
-    expect(page).to have_content("venmo")
+    expect(page).to have_content("Name")
+  end
+
+  it "deletes an account" do
+    click_on "Unlink"
+    expect(page).to_not have_content("Name")
   end
 end

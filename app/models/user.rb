@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
 
   belongs_to :society
-  has_many :accounts
+  has_many :accounts, dependent: :destroy
 end
