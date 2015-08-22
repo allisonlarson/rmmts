@@ -1,0 +1,72 @@
+.user {
+  height: 100%;
+}
+
+.sidebar {
+ float: left;
+ width: 25%;
+ height: 100%;
+ background: #D3D3D3;
+ text-align: center
+}
+
+.balance {
+  margin: 15%
+}
+
+h2, h3, p {
+  text-transform: capitalize
+}
+
+.main-content {
+  float: right;
+  width: 75%;
+  background: #FFF;
+}
+
+.nav {
+  margin: 0;
+  text-align: center
+}
+
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav li {
+  display: inline;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 0;
+}
+
+.active {
+  font-weight: 700
+}
+
+.content {
+  margin: 10%;
+  margin-top: 5%;
+}
+
+.content table {
+ width: 100%;
+}
+.add-account-btn {
+  float: right;
+  display: inline;
+}
+
+.payment-accounts, .account-settings {
+  padding: 40px;
+}
+.account-name {
+  float: left;
+  display: inline;
+}
+
+.account-table {
+  clear: both;
+}

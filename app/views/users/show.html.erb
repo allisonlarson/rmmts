@@ -1,6 +1,46 @@
-Welcome <%= @current_user.name %>
-<% if @current_user.accounts.first %>
-  <%= @current_user.accounts.first.provider %>
-<% else %>
-  <a href='/auth/venmo'>Login with Venmo</a>
-<% end %>
+<div class="user">
+  <div class="sidebar">
+    <h1 class="society">Household</h1>
+    <img class="account-photo" src="http://www.genengnews.com/app_themes/genconnect/images/default_profile.jpg" alt="profile_picture">
+    <p><%= current_user.name %></p>
+    <div class="balance">
+      <h2 class="balance-amt">$XX.XX</h2>
+      <button class="pay-now-btn">Pay Now</button>
+    </div>
+    <button class="logout">Logout</button>
+  </div>
+
+  <div class="main-content">
+    <div class="nav">
+      <ul>
+        <li>Expenses</li>
+        <li>History</li>
+        <li class="active">Account</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <button class="add-account-btn">Add New</button>
+      <div class="payment-accounts">
+        <h3 class="account-name"><%= current_user.accounts.first.provider %></h3>
+        <table class="account-table">
+          <tr>
+            <td>Name</td>
+            <td>XXXX</td>
+            <td><button>Unlink</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="account-settings">
+        <h3>Account Settings</h3>
+        <table>
+          <tr>
+            <td>I'm done with this</td>
+            <td><button>Delete Account</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
