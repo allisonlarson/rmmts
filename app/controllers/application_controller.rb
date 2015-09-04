@@ -7,5 +7,9 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:user_id])
   end
 
-  helper_method :current_user
+  def current_society
+    @current_society ||= @current_user.society
+  end
+
+  helper_method :current_user, :current_society
 end

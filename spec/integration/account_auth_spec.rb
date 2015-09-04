@@ -2,7 +2,8 @@ require 'rails_helper'
 RSpec.describe "User can authorize account", type: :feature do
   before do
     Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:venmo]
-    User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password")
+    society = Society.create(name: "test")
+    User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: society)
 
     visit '/'
     click_on 'Login'

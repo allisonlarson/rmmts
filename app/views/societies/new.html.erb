@@ -1,4 +1,10 @@
 <%= form_for @society do |f| %>
+  <%= f.fields_for :users do |ff| %>
+    Name: <%= ff.text_field :name %><br />
+    Email: <%= ff.text_field :email %><br />
+    Password: <%= ff.password_field :password %><br />
+    Password Confirmation: <%= ff.password_field :password_confirmation %><br />
+  <% end %>
   Name: <%= f.text_field :name %><br />
   Description: <%= f.text_field :description %><br />
   <%= f.submit %>

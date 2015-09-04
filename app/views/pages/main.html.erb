@@ -7,8 +7,10 @@
   <div id="content-container">
     <div id="content">
       <h1>Rmmts</h1>
-      <input type="text"></input>
-      <%= link_to "Get Started", new_user_path, class:"btn" %>
+      <%= form_tag "/society", method: "post" do%>
+        <%= text_field_tag(:society) %>
+        <%= submit_tag "Go", class:"btn" %>
+    <% end %>
     </div>
   </div>
 </div>

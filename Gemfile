@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rspec-rails'
 gem 'omniauth-venmo'
 gem 'attr_encrypted'
+gem 'friendly_id', '~> 5.1.0'
 
 
 # Use ActiveModel has_secure_password

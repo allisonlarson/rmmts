@@ -3,27 +3,46 @@ RSpec.describe "User can login", type: :feature do
 
   context "valid user" do
     before do
-      User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password")
+      society = Society.create(name: "Test")
+      User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: society)
       visit '/'
-      click_on 'Login'
-      fill_in 'email', with: "test@test.com"
-      fill_in 'password', with: "password"
-      click_button "Login"
     end
 
-    it "logs in" do
-      expect(page).to have_content 'Test User'
+    context "homepage" do
+      it "logs in with society" do
+        fill_in 'society', with: "Test"
+        click_on 'Go'
+
+        fill_in 'email', with: "test@test.com"
+        fill_in 'password', with: "password"
+        click_button "Login"
+
+        expect(page).to have_content 'Test User'
+      end
     end
 
-     it "logs out" do
-       click_link "Logout"
-       expect(page).to_not have_content 'Test User'
-     end
+    context "login page" do
+      before do
+        click_on 'Login'
+        fill_in 'email', with: "test@test.com"
+        fill_in 'password', with: "password"
+        click_button "Login"
+      end
 
-     it "deletes user account" do
-      click_link "Delete Account"
-      expect(page).to_not have_content 'Test User'
-     end
+      it "logs in" do
+        expect(page).to have_content 'Test User'
+      end
+
+      it "logs out" do
+        click_link "Logout"
+        expect(page).to_not have_content 'Test User'
+      end
+
+      it "deletes user account" do
+        click_link "Delete Account"
+        expect(page).to_not have_content 'Test User'
+      end
+    end
   end
 
   context "invalid user" do
@@ -37,6 +56,4 @@ RSpec.describe "User can login", type: :feature do
       expect(page).to_not have_content 'Test User'
     end
   end
-
-
 end
