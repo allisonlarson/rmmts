@@ -1,0 +1,10 @@
+.expenses {
+  height: 100%;
+}
+
+.expense-form {
+  width: 100%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}

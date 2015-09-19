@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
 
   belongs_to :society
   has_many :accounts, dependent: :destroy
+  has_many :expenses
 end

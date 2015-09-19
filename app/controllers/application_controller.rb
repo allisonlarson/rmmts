@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_society
-    @current_society ||= @current_user.society
+    @current_society ||= current_user.society
   end
 
   helper_method :current_user, :current_society
