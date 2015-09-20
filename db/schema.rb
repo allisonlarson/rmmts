@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919221435) do
+ActiveRecord::Schema.define(version: 20150920171233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150919221435) do
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.integer "amount"
+    t.integer "amount_cents", default: 0, null: false
     t.integer "society_id"
     t.integer "user_id"
     t.string  "name"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20150919221435) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "amount_cents", default: 0, null: false
+    t.integer "payee_id"
+    t.integer "payer_id"
+    t.integer "expense_id"
+    t.string  "state"
+  end
 
   create_table "societies", force: :cascade do |t|
     t.string   "description"

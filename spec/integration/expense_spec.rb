@@ -1,32 +1,59 @@
 require 'rails_helper'
 RSpec.describe "Expenses", type: :feature do
   before do
-    society = Society.create(name: "Test")
-    User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: society)
-    Expense.create(name: "Electricity", description: "All That Power", amount: 100, society: society)
-    visit '/'
-    click_on 'Login'
-    fill_in 'email', with: "test@test.com"
-    fill_in 'password', with: "password"
-    click_button "Login"
-    click_on "Expenses"
+    @society = Society.create(name: "Test")
+    @user = User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: @society)
+    User.create(name: "Other User", email: "other@test.com", password: "password", password_confirmation: "password", society: @society)
   end
 
-  it "can see all expenses" do
-    expect(page).to have_content("Electricity")
-    expect(page).to have_content("All That Power")
-    expect(page).to have_content("100")
+  context "existing expenses" do
+    before do
+      Expense.create(name: "Electricity", description: "All That Power", amount: 100, society: @society, user: @user)
+      visit '/'
+      click_on 'Login'
+      fill_in 'email', with: "test@test.com"
+      fill_in 'password', with: "password"
+      click_button "Login"
+      click_on "Expenses"
+    end
+
+    it "can see all expenses" do
+      expect(page).to have_content("Electricity")
+      expect(page).to have_content("All That Power")
+      expect(page).to have_content("100")
+    end
   end
 
-  it "can add a new expense" do
-    fill_in "expense[name]", with: "Internet"
-    fill_in "expense[description]", with: "A Series of Tubes"
-    fill_in "expense[amount]", with: "50"
-    click_button "Create Expense"
+  context "adding a new expense" do
+    before do
+      visit '/'
+      click_on 'Login'
+      fill_in 'email', with: "test@test.com"
+      fill_in 'password', with: "password"
+      click_button "Login"
+      click_on "Expenses"
+      fill_in "expense[name]", with: "Internet"
+      fill_in "expense[description]", with: "A Series of Tubes"
+      fill_in "expense[amount]", with: "50"
+      click_button "Create Expense"
+    end
 
-    expect(page).to have_content("Internet")
-    expect(page).to have_content("A Series of Tubes")
-    expect(page).to have_content("50")
+    it "can add a new expense" do
+      expect(page).to have_content("Internet")
+      expect(page).to have_content("A Series of Tubes")
+      expect(page).to have_content("50")
+    end
+
+    it "adds payments for users from expense" do
+      click_on "Logout"
+      click_on "Login"
+      fill_in 'email', with: "other@test.com"
+      fill_in 'password', with: "password"
+      click_on "Login"
+      click_on "Payments"
+
+      expect(page).to have_content("Internet")
+      expect(page).to have_content("25")
+    end
   end
-
 end

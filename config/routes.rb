@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     get "/account/edit" => "users#edit", as: "edit_user"
     delete "/account/payment_account/:id" => "accounts#destroy", as: "user_account"
 
-    resources :users, :path => '', except: [:index, :show, :edit]
+    resources :users, :path => '', except: [:index, :show, :edit] do
+      resources :payments
+    end
+
     resources :expenses
   end
 end

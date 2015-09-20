@@ -2,17 +2,18 @@ class ExpensesController < ApplicationController
 
   def index
     @expense = current_society.expenses.new
+
     @expenses = current_society.expenses
   end
 
   def create
-    @expense = current_society.expenses.new(expenses_params)
+    @expense = current_society.expenses.new(expenses_params.merge!(user_id: current_user.id))
+    @expense.build_payments
     if @expense.save
       redirect_to society_expenses_path(current_society)
     else
       render 'index'
     end
-
   end
 
   private

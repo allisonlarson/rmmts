@@ -13,6 +13,8 @@ gem 'rspec-rails'
 gem 'omniauth-venmo'
 gem 'attr_encrypted'
 gem 'friendly_id', '~> 5.1.0'
+gem 'state_machines-activerecord'
+gem 'money-rails'
 
 
 # Use ActiveModel has_secure_password

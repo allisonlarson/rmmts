@@ -1,4 +1,4 @@
-<div class="expenses">
+<div class="payments">
   <div class="sidebar">
     <h1 class="society"><%= current_user.society.name %></h1>
     <img class="account-photo" src="http://www.genengnews.com/app_themes/genconnect/images/default_profile.jpg" alt="profile_picture">
@@ -15,35 +15,24 @@
     <div class="nav">
       <ul>
         <li><%= link_to "Expenses", society_expenses_path %></li>
-        <li><%= link_to "Payments", society_user_payments_path(current_society, current_user) %></li>
+        <li><%= link_to "Payments", society_user_payments_path %></li>
         <li><%= link_to "Account", society_user_path %></li>
       </ul>
     </div>
 
     <div class="content">
-      <div class="expense-form">
-        <%= form_for [:society, @expense] do |f|%>
-          <%= f.label :name %>
-          <%= f.text_field :name %>
-          <%= f.label :amount %>
-          <%= f.text_field :amount %>
-          <%= f.label :description %>
-          <%= f.text_field :description %>
-          <%= f.submit %>
-        <% end %>
-      </div>
-      <table class="expenses-table">
+      <table class="payments-table">
         <tr>
           <th>Name</th>
           <th>Amount</th>
-          <th>Description</th>
+          <th>Pay to</th>
           <th>State</th>
         </tr>
-        <% @expenses.each do |expense| %>
+        <% @payments.each do |payment| %>
           <tr>
-            <td><%= expense.name %></td>
-            <td><%= expense.amount %></td>
-            <td><%= expense.description %></td>
+            <td><%= payment.expense.name %></td>
+            <td><%= payment.amount %></td>
+            <td><%= payment.payee.name %></td>
             <td>Pending</td>
           </tr>
         <% end %>
