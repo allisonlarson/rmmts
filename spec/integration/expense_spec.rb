@@ -1,19 +1,16 @@
 require 'rails_helper'
 RSpec.describe "Expenses", type: :feature do
   before do
-    @society = Society.create(name: "Test")
-    @user = User.create(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: @society)
-    User.create(name: "Other User", email: "other@test.com", password: "password", password_confirmation: "password", society: @society)
+    @society = Society.create!(name: "Test")
+    @user = User.create!(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: @society)
+    @user2 = User.create!(name: "Other User", email: "other@test.com", password: "password", password_confirmation: "password", society: @society)
   end
 
   context "existing expenses" do
     before do
       Expense.create(name: "Electricity", description: "All That Power", amount: 100, society: @society, user: @user)
       visit '/'
-      click_on 'Login'
-      fill_in 'email', with: "test@test.com"
-      fill_in 'password', with: "password"
-      click_button "Login"
+      login
       click_on "Expenses"
     end
 
@@ -27,10 +24,7 @@ RSpec.describe "Expenses", type: :feature do
   context "adding a new expense" do
     before do
       visit '/'
-      click_on 'Login'
-      fill_in 'email', with: "test@test.com"
-      fill_in 'password', with: "password"
-      click_button "Login"
+      login
       click_on "Expenses"
       fill_in "expense[name]", with: "Internet"
       fill_in "expense[description]", with: "A Series of Tubes"
@@ -46,10 +40,7 @@ RSpec.describe "Expenses", type: :feature do
 
     it "adds payments for users from expense" do
       click_on "Logout"
-      click_on "Login"
-      fill_in 'email', with: "other@test.com"
-      fill_in 'password', with: "password"
-      click_on "Login"
+      login("other@test.com")
       click_on "Payments"
 
       expect(page).to have_content("Internet")

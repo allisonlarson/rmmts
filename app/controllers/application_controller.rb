@@ -2,14 +2,25 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  def after_sign_in_path_for(resource)
+    if current_society
+      society_user_path(current_society)
+    else
+      new_society_path
+    end
+  end
 
-  def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
+  def after_update_path_for(resource)
+    society_user_path(current_society)
   end
 
   def current_society
     @current_society ||= current_user.society
   end
 
-  helper_method :current_user, :current_society
+  helper_method :current_society
 end

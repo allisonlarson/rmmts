@@ -8,7 +8,7 @@
       <h2 class="balance-amt"><%= current_user.unpaid_amount %></h2>
       <button class="pay-now-btn">Pay Now</button>
     </div>
-    <%= link_to "Logout", logout_path, class: "btn" %>
+    <%= link_to "Logout", destroy_user_session_path, method: "DELETE", class: "btn" %>
   </div>
 
   <div class="main-content">
@@ -40,8 +40,7 @@
         <h3>Account Settings</h3>
         <table class="account-table">
           <tr>
-            <td>I'm done with this</td>
-            <td><%= link_to "Delete Account", society_user_path(current_user.society, current_user), method: "DELETE", class: "btn" %></td>
+            <td><%= link_to "Edit Account", edit_user_registration_path, class: "btn" %></td>
           </tr>
         </table>
       </div>

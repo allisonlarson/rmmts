@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   extend FriendlyId
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+    :recoverable, :rememberable, :trackable, :validatable, :lockable
   friendly_id :name, use: :slugged
-  has_secure_password
-
-  validates :email, presence: true, uniqueness: true
 
   belongs_to :society
   has_many :accounts, dependent: :destroy
@@ -30,4 +31,5 @@ class User < ActiveRecord::Base
   def uncollected_amount
     collections.unpaid.inject(0) { |sum, e| sum + e.amount }
   end
+
 end

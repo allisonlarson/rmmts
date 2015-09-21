@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     current_user.accounts.find_or_create_from_omniauth(env['omniauth.auth'])

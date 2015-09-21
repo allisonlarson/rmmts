@@ -4,5 +4,4 @@ class Society < ActiveRecord::Base
   has_many :users
   has_many :expenses
   validates :name, presence: true, uniqueness: true
-  accepts_nested_attributes_for :users
 end

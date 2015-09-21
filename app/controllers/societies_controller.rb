@@ -2,14 +2,13 @@ class SocietiesController < ApplicationController
 
   def new
     @society = Society.new
-    @society.users.build
   end
 
   def create
     @society = Society.new(society_params)
     if @society.save
-      session[:user_id] = @society.users.first.id
-      redirect_to society_user_path(@society, @society.users.first)
+      current_user.update_attributes!(society: @society)
+      redirect_to society_user_path(@society)
     else
       render 'new'
     end

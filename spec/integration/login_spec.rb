@@ -13,9 +13,9 @@ RSpec.describe "User can login", type: :feature do
         fill_in 'society', with: "Test"
         click_on 'Go'
 
-        fill_in 'email', with: "test@test.com"
-        fill_in 'password', with: "password"
-        click_button "Login"
+        fill_in 'user[email]', with: "test@test.com"
+        fill_in 'user[password]', with: "password"
+        click_button "Log in"
 
         expect(page).to have_content 'Test User'
       end
@@ -23,10 +23,7 @@ RSpec.describe "User can login", type: :feature do
 
     context "login page" do
       before do
-        click_on 'Login'
-        fill_in 'email', with: "test@test.com"
-        fill_in 'password', with: "password"
-        click_button "Login"
+        login
       end
 
       it "logs in" do
@@ -49,9 +46,9 @@ RSpec.describe "User can login", type: :feature do
     it "returns an error" do
       visit '/'
       click_on 'Login'
-      fill_in 'email', with: "Test User"
-      fill_in 'password', with: "Password"
-      click_button "Login"
+      fill_in 'user[email]', with: "Test User"
+      fill_in 'user[password]', with: "Password"
+      click_button "Log in"
 
       expect(page).to_not have_content 'Test User'
     end

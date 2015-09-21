@@ -8,7 +8,7 @@
       <h2 class="balance-amt"><%= current_user.unpaid_amount %></h2>
       <button class="pay-now-btn">Pay Now</button>
     </div>
-    <%= link_to "Logout", logout_path, class: "btn" %>
+    <%= link_to "Logout", destroy_user_session_path, method: "DELETE", class: "btn" %>
   </div>
 
   <div class="main-content">

@@ -6,20 +6,32 @@ RSpec.describe "User can sign-up", type: :feature do
       visit '/'
       fill_in 'society', with: "test"
       click_on 'Go'
+
+      fill_in 'user[email]', with: "test@test.com"
+      fill_in 'user[password]', with: "password"
+      fill_in 'user[password_confirmation]', with: "password"
+      click_on "Sign up"
+
       expect(current_path).to eq(new_society_path)
 
-      fill_in 'society[users_attributes][0][name]', with: "Test User"
-      fill_in 'society[users_attributes][0][email]', with: "test@test.com"
-      fill_in 'society[users_attributes][0][password]', with: "password"
-      fill_in 'society[users_attributes][0][password_confirmation]', with: "password"
-      fill_in 'society[name]', with: "Test Society"
-      click_button "Create Society"
+      fill_in 'society[name]', with: 'test'
+      click_on "Create Society"
 
-      expect(page).to have_content 'Test User'
+      expect(page).to have_content 'test@test.com'
     end
   end
 
   context "existing user" do
+
+    context "without a society" do
+      before { User.create(name: "Existing User", email: "test@test.com", password: "password", password_confirmation: "password") }
+      it "pushes to create society" do
+        visit '/'
+        login
+        expect(current_path).to eq(new_society_path)
+      end
+
+    end
     before do
       User.create(name: "Existing User", email: "test@test.com", password: "password", password_confirmation: "password")
     end
@@ -28,15 +40,12 @@ RSpec.describe "User can sign-up", type: :feature do
       visit '/'
       fill_in 'society', with: "test"
       click_on 'Go'
-      expect(current_path).to eq(new_society_path)
 
-      fill_in 'society[users_attributes][0][name]', with: "User"
-      fill_in 'society[users_attributes][0][email]', with: "test@test.com"
-      fill_in 'society[users_attributes][0][password]', with: "password"
-      fill_in 'society[users_attributes][0][password_confirmation]', with: "password"
-      fill_in 'society[name]', with: "Test Society"
+      fill_in 'user[email]', with: "test@test.com"
+      fill_in 'user[password]', with: "password"
+      fill_in 'user[password_confirmation]', with: "password"
 
-      click_button "Create Society"
+      click_button "Sign up"
 
       expect(page).to_not have_content 'Test User'
     end

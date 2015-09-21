@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  root "pages#main"
+  devise_for :users
+  root to: "pages#main"
   get 'auth/:provider/callback' => "accounts#create"
   post 'society' => "pages#society"
-  get 'login' => "sessions#new"
-  post 'login' => "sessions#create"
-  get 'logout' => "sessions#destroy"
 
   resources :societies, :path => '', :only => [:new, :create]
 
