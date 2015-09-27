@@ -1,5 +1,6 @@
 <%= form_for @society do |f| %>
   Name: <%= f.text_field :name %><br />
   Description: <%= f.text_field :description %><br />
+  Invite: <%= f.text_area :invitees, placeholder: "Separate with space" %><br />
   <%= f.submit %>
 <% end %>

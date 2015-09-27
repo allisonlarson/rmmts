@@ -7,6 +7,7 @@ RSpec.describe "User can sign-up", type: :feature do
       fill_in 'society', with: "test"
       click_on 'Go'
 
+      fill_in 'user[name]', with: "Test User"
       fill_in 'user[email]', with: "test@test.com"
       fill_in 'user[password]', with: "password"
       fill_in 'user[password_confirmation]', with: "password"
@@ -41,6 +42,7 @@ RSpec.describe "User can sign-up", type: :feature do
       fill_in 'society', with: "test"
       click_on 'Go'
 
+      fill_in 'user[name]', with: "Test User"
       fill_in 'user[email]', with: "test@test.com"
       fill_in 'user[password]', with: "password"
       fill_in 'user[password_confirmation]', with: "password"

@@ -34,11 +34,6 @@ RSpec.describe "User can login", type: :feature do
         click_link "Logout"
         expect(page).to_not have_content 'Test User'
       end
-
-      it "deletes user account" do
-        click_link "Delete Account"
-        expect(page).to_not have_content 'Test User'
-      end
     end
   end
 
