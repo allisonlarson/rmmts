@@ -13,6 +13,14 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def pay
+    if current_user.pay
+      redirect_to 'show'
+    else
+      render 'show'
+    end
+  end
+
   private
 
   def user_params

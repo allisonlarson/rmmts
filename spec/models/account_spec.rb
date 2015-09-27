@@ -16,24 +16,25 @@ RSpec.describe Account do
         token: 'token'
       },
     }}
+
     context "a new user" do
       let(:uid) { omniauth_hash[:uid] }
 
-      it "creates a new user" do
+      it "creates a new account" do
         expect { Account.find_or_create_from_omniauth(omniauth_hash) }.to change{ Account.count }.by(1)
         account = Account.last
         expect(account.uid).to eq(uid)
       end
     end
 
-    context "an existing user" do
+    context "an existing account" do
       before { Account.create!( provider: 'venmo', uid: '123545', access_token: 'token') }
 
-      it "does not create a new user" do
+      it "does not create a new account" do
         expect { Account.find_or_create_from_omniauth(omniauth_hash) }.to_not change{ Account.count }
       end
 
-      it "returns an existing user" do
+      it "returns an existing account" do
         original_account = Account.last
         omniauth_hash = { provider: original_account.provider, uid: original_account.uid }
         found_account = Account.find_or_create_from_omniauth(omniauth_hash)

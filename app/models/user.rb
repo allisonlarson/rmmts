@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
+  class PaymentError < StandardError; end
   extend FriendlyId
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :lockable
   friendly_id :name, use: :slugged
@@ -11,6 +10,24 @@ class User < ActiveRecord::Base
   has_many :expenses
   has_many :payments, class_name: 'Payment', foreign_key: 'payer_id'
   has_many :collections, class_name: 'Payment', foreign_key: 'payee_id'
+
+  def pay
+    payments.unpaid.group_by(&:payee_id).each do |user_id, payments|
+      uid = User.find(user_id).accounts.first.uid
+      payment_amount = payments.inject(0) { |sum, e| sum + e.amount }
+      response = default_account.make_payment(uid, payment_amount)
+
+      if response == "settled"
+        payments.each(&:succeed!)
+      else
+        throw PaymentError
+      end
+    end
+  end
+
+  def default_account
+    accounts.first
+  end
 
   def expense_amount
     expenses.inject(0) { |sum, e| sum + e.amount }

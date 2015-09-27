@@ -6,7 +6,7 @@
     <p><%= current_user.email %></p>
     <div class="balance">
       <h2 class="balance-amt"><%= current_user.unpaid_amount %></h2>
-      <button class="pay-now-btn">Pay Now</button>
+      <%= link_to "Pay Now", society_user_pay_path, method: "POST", class: "btn pay-now-btn" %>
     </div>
     <%= link_to "Invite Users", new_user_invitation_path, class: "btn" %>
     <%= link_to "Logout", destroy_user_session_path, method: "DELETE", class: "btn" %>

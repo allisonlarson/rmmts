@@ -17,6 +17,7 @@ gem 'state_machines-activerecord'
 gem 'money-rails'
 gem 'devise'
 gem 'devise_invitable'
+gem 'http'
 
 
 # Use ActiveModel has_secure_password

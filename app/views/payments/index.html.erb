@@ -33,7 +33,8 @@
             <td><%= payment.expense.name %></td>
             <td><%= payment.amount %></td>
             <td><%= payment.payee.name %></td>
-            <td>Pending</td>
+            <td><%= payment.state %></td>
+            <td><%= link_to "Pay", society_user_payment_pay_path(payment_id: payment.id), method: "POST", class: "btn" %>
           </tr>
         <% end %>
       </table>
