@@ -18,6 +18,10 @@ gem 'money-rails'
 gem 'devise'
 gem 'devise_invitable'
 gem 'http'
+gem 'rails_12factor', group: :production
+gem 'delayed_job_active_record'
+gem 'devise-async'
+gem 'daemons'
 
 
 # Use ActiveModel has_secure_password
@@ -28,6 +32,8 @@ gem 'http'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'letter_opener', group: :development
 
 group :development, :test do
   gem 'pry-byebug'
