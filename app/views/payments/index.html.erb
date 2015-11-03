@@ -6,6 +6,7 @@
 
 
     <div class="content">
+      <h3>Payments</h3>
       <table class="payments-table">
         <tr>
           <th>Name</th>
@@ -20,9 +21,27 @@
             <td><%= payment.payee.name %></td>
             <td><%= payment.state %></td>
             <td><%= link_to "Pay", society_user_payment_pay_path(payment_id: payment.id), method: "POST", class: "btn" %>
+        </tr>
+      <% end %>
+      </table>
+
+      <h3>Collections</h3>
+      <table class="collections-table">
+        <tr>
+          <th>Name</th>
+          <th>Amount</th>
+          <th>Pay to</th>
+          <th>State</th>
+        </tr>
+        <% @collections.each do |collection| %>
+          <tr>
+            <td><%= collection.expense.name %></td>
+            <td><%= collection.amount %></td>
+            <td><%= collection.payer.name %></td>
+            <td><%= collection.state %></td>
           </tr>
         <% end %>
       </table>
     </div>
   </div>
-<div>
+  <div>

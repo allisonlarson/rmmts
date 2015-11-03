@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   before_action :authenticate_user!
   def index
     @payments = current_user.payments
+    @collections = current_user.collections
   end
 
   def pay

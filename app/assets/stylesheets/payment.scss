@@ -1,3 +1,11 @@
 .payments {
   height: 100%;
+
+  &h3 {
+    text-align: center;
+  }
+}
+
+.payments-table {
+  margin-bottom: 30px;
 }
