@@ -1,17 +1,20 @@
-<div id="main-header">
-  <div id="find-place">
-    <%= link_to "Login", new_user_session_path, class:"btn" %>
-    <%= link_to "Logout", destroy_user_session_path, method: "DELETE", class:"btn" %>
+<div class="main">
+  <div class="main-header">
+    <div class="main-nav">
+      <% if user_signed_in? %>
+        <%= link_to "Logout", destroy_user_session_path, method: "DELETE", class:"btn login-btn" %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class:"btn login-btn" %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div id="main-page">
-  <div id="content-container">
-    <div id="content">
-      <h1>Rmmts</h1>
-      <%= form_tag "/society", method: "post" do%>
-        <%= text_field_tag(:society) %>
-        <%= submit_tag "Go", class:"btn" %>
-    <% end %>
+  <div class="main-page">
+    <div class="main-content-container">
+      <h1 class="title">Rmmts</h1>
+      <%= form_tag "/society", method: "post" do %>
+        <%= text_field_tag :society, nil, placeholder: "Enter the name of your society", class: "society-input"%>
+        <%= submit_tag "Go", class:"btn go-btn" %>
+      <% end %>
     </div>
   </div>
 </div>

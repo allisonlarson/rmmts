@@ -1,0 +1,32 @@
+.user {
+  height: 100%;
+}
+
+.balance {
+  margin: 15%
+}
+
+.content {
+  margin: 10%;
+  margin-top: 5%;
+}
+
+.content table {
+ width: 100%;
+}
+.add-account-btn {
+  float: right;
+  display: inline;
+}
+
+.payment-accounts, .account-settings {
+  padding: 40px;
+}
+.account-name {
+  float: left;
+  display: inline;
+}
+
+.account-table {
+  clear: both;
+}

@@ -1,24 +1,9 @@
 <div class="payments">
-  <div class="sidebar">
-    <h1 class="society"><%= current_user.society.name %></h1>
-    <img class="account-photo" src="http://www.genengnews.com/app_themes/genconnect/images/default_profile.jpg" alt="profile_picture">
-    <p><%= current_user.name %></p>
-    <p><%= current_user.email %></p>
-    <div class="balance">
-      <h2 class="balance-amt"><%= current_user.unpaid_amount %></h2>
-      <button class="pay-now-btn">Pay Now</button>
-    </div>
-    <%= link_to "Logout", destroy_user_session_path, method: "DELETE", class: "btn" %>
-  </div>
+  <%= render "/shared/sidebar" %>
 
   <div class="main-content">
-    <div class="nav">
-      <ul>
-        <li><%= link_to "Expenses", society_expenses_path %></li>
-        <li><%= link_to "Payments", society_user_payments_path %></li>
-        <li><%= link_to "Account", society_user_path %></li>
-      </ul>
-    </div>
+    <%= render "/shared/user_nav" %>
+
 
     <div class="content">
       <table class="payments-table">
