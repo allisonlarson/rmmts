@@ -11,7 +11,7 @@ class Account < ActiveRecord::Base
     end
   end
 
-  def make_payment(uid, payment_amount)
+  def make_payment(payment_amount, uid)
     venmo_url = ENV['VENMO_API'] || "https://sandbox-api.venmo.com/v1"
     payment_amount = payment_amount.format({symbol: false})
 

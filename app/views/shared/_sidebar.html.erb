@@ -4,7 +4,7 @@
     <p><%= current_user.name %></p>
     <p><%= current_user.email %></p>
     <div class="balance">
-      <h2 class="balance-amt"><%= current_user.unpaid_amount %></h2>
+      <h2 class="balance-amt"><%= current_user.total_owed %></h2>
       <%= link_to "Pay Now", society_user_pay_path, method: "POST", class: "btn pay-now-btn" %>
     </div>
     <%= link_to "Invite Users", new_user_invitation_path, class: "btn" %>

@@ -15,15 +15,17 @@ class Payment < ActiveRecord::Base
     end
 
     event :failed do
-      transition :from => :processing, :to => :failure
+      transition :from => :pending, :to => :failure
     end
   end
 
   def pay
-    response = account.make_payment!(payee.uid, amount)
+    response = payer.make_payment!(amount, payee.default_account.uid)
 
     if response == "settled"
       self.succeed!
+      payer.credit!(amount, payee)
+      payee.credit!(-amount, payer)
     elsif response == "failed"
       self.failed!
     else
