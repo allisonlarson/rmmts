@@ -28,7 +28,7 @@
             <td><%= expense.amount %></td>
             <td><%= expense.description %></td>
             <td><%= expense.user.try(:name) %></td>
-            <td>Pending</td>
+            <td><%= expense.state %></td>
           </tr>
         <% end %>
       </table>

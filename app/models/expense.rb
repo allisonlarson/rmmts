@@ -16,6 +16,10 @@ class Expense < ActiveRecord::Base
     end
   end
 
+  def state
+    payments.all?(&:success?) ? "success" : "pending"
+  end
+
   private
 
   def payment_amount(amount)
