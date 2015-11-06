@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :expenses
   has_many :payments, class_name: 'Payment', foreign_key: 'payer_id'
   has_many :collections, class_name: 'Payment', foreign_key: 'payee_id'
+  has_many :credits, class_name: 'Credit', foreign_key: 'owner_id'
 
   def pay
     payments.unpaid.group_by(&:payee_id).each do |user_id, payments|
@@ -25,8 +26,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def make_payment!(amount, uid)
+    default_account.make_payment!(amount, uid)
+  end
+
+  def credit!(credit_amount, user)
+   credit = credits.find_or_initialize_by(user: user)
+   credit.amount += credit_amount
+   credit.save!
+  end
+
   def default_account
     accounts.first
+  end
+
+  def total_owed
+    credits.inject(0) { |sum, c| sum + c.amount }
   end
 
   def expense_amount

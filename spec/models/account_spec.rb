@@ -2,9 +2,9 @@ require 'rails_helper'
 RSpec.describe Account do
   context "a valid account" do
     it "has an encrypted access token" do
-      account = Account.create!(access_token: "12345")
+      account = Account.create!(token: "12345")
 
-      expect(account.encrypted_access_token).to_not eq(account.access_token)
+      expect(account.encrypted_token).to_not eq(account.token)
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe Account do
     end
 
     context "an existing account" do
-      before { Account.create!( provider: 'venmo', uid: '123545', access_token: 'token') }
+      before { Account.create!( provider: 'venmo', uid: '123545', token: 'token') }
 
       it "does not create a new account" do
         expect { Account.find_or_create_from_omniauth(omniauth_hash) }.to_not change{ Account.count }
