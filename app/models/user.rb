@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
     accounts.first
   end
 
+  def full_credit?(amount)
+    credit >= amount
+  end
   def expense_amount
     expenses.inject(0) { |sum, e| sum + e.amount }
   end

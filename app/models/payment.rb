@@ -4,6 +4,8 @@ class Payment < ActiveRecord::Base
   belongs_to :payer, class_name: "User"
   belongs_to :expense
 
+  after_create :use_credit
+
   scope :paid, -> { where(state: 'paid') }
   scope :unpaid, -> { where.not(state: 'paid') }
 
@@ -16,6 +18,16 @@ class Payment < ActiveRecord::Base
 
     event :failed do
       transition :from => :processing, :to => :failure
+    end
+  end
+
+  def use_credit
+    if payer.full_credit?(amount)
+      payer.update_attributes!(credit: payer.credit - amount)
+      succeed!
+    else
+      update_attributes!(amount: amount - payer.credit)
+      payer.update_attributes!(credit: 0)
     end
   end
 
