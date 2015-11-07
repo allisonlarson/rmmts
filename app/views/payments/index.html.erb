@@ -12,14 +12,14 @@
           <th>Name</th>
           <th>Amount</th>
           <th>Pay to</th>
-          <th>State</th>
+          <th>Paid At</th>
         </tr>
         <% @payments.each do |payment| %>
           <tr>
             <td><%= payment.expense.name %></td>
             <td><%= payment.amount %></td>
             <td><%= payment.payee.name %></td>
-            <td><%= payment.state %></td>
+            <td><%= payment.paid_at.try(:strftime, "%m/%d/%Y %l:%M %p") %></td>
             <td><%= link_to "Pay", society_user_payment_pay_path(payment_id: payment.id), method: "POST", class: "btn" %>
         </tr>
       <% end %>
@@ -31,14 +31,14 @@
           <th>Name</th>
           <th>Amount</th>
           <th>Pay to</th>
-          <th>State</th>
+          <th>Paid At</th>
         </tr>
         <% @collections.each do |collection| %>
           <tr>
             <td><%= collection.expense.name %></td>
             <td><%= collection.amount %></td>
             <td><%= collection.payer.name %></td>
-            <td><%= collection.state %></td>
+            <td><%= collection.paid_at.try(:strftime, "%m/%d/%Y %l:%M %p") %></td>
           </tr>
         <% end %>
       </table>

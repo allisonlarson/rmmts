@@ -20,7 +20,7 @@
           <th>Amount</th>
           <th>Description</th>
           <th>Submitted By</th>
-          <th>State</th>
+          <th>Paid At</th>
         </tr>
         <% @expenses.each do |expense| %>
           <tr>
@@ -28,7 +28,7 @@
             <td><%= expense.amount %></td>
             <td><%= expense.description %></td>
             <td><%= expense.user.try(:name) %></td>
-            <td>Pending</td>
+            <td><%= expense.paid_at.try(:strftime, "%m/%d/%Y %l:%M %p") %></td>
           </tr>
         <% end %>
       </table>
