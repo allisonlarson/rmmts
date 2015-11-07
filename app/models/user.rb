@@ -57,5 +57,4 @@ class User < ActiveRecord::Base
   def uncollected_amount
     collections.unpaid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
-
 end

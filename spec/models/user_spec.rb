@@ -9,17 +9,15 @@ RSpec.describe User, type: :model do
   it { should have_many(:collections).class_name('Payment').with_foreign_key(:payee_id) }
 
   describe "#full_credit?" do
-    let!(:user) { User.create!(email: "test@example.com", password: "password", credit_cents: credit) }
+    let(:user) { User.create!(email: "test@example.com", password: "password", credit_cents: 100) }
 
     context "with full credit" do
-      let(:credit) { 100 }
       it "returns true" do
-        expect(user.full_credit?(Money.new(credit))).to eq(true)
+        expect(user.full_credit?(Money.new(100))).to eq(true)
       end
     end
 
     context "without full credit" do
-      let(:credit) { 100 }
       it "returns false" do
         expect(user.full_credit?(Money.new(200))).to eq(false)
       end
