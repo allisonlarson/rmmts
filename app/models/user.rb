@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
     :async, :recoverable, :rememberable, :trackable, :validatable, :lockable
   friendly_id :name, use: :slugged
+  monetize :credit_cents
 
   belongs_to :society
   has_many :accounts, dependent: :destroy
