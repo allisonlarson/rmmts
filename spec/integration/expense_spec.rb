@@ -32,19 +32,37 @@ RSpec.describe "Expenses", type: :feature do
       click_button "Create Expense"
     end
 
-    it "can add a new expense" do
-      expect(page).to have_content("Internet")
-      expect(page).to have_content("A Series of Tubes")
-      expect(page).to have_content("50")
+    context "the creating user" do
+      it "can add a new expense" do
+        expect(page).to have_content("Internet")
+        expect(page).to have_content("A Series of Tubes")
+        expect(page).to have_content("50")
+      end
+
+      it "shows total owed of expense" do
+        within('.balance') do
+          expect(page).to have_content("-25.00")
+        end
+      end
     end
 
-    it "adds payments for users from expense" do
-      click_on "Logout"
-      login("other@test.com")
-      click_on "Payments"
+    context "the requested user" do
+      before do
+        click_on "Logout"
+        login("other@test.com")
+        click_on "Payments"
+      end
 
-      expect(page).to have_content("Internet")
-      expect(page).to have_content("25")
+      it "adds payments for users from expense" do
+        expect(page).to have_content("Internet")
+        expect(page).to have_content("25")
+      end
+
+      it "shows total owed" do
+        within('.balance') do
+          expect(page).to have_content("25.00")
+        end
+      end
     end
   end
 end

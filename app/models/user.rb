@@ -33,24 +33,29 @@ class User < ActiveRecord::Base
   def full_credit?(amount)
     credit >= amount
   end
+
+  def total_owed
+    unpaid_amount - credit
+  end
+
   def expense_amount
-    expenses.inject(0) { |sum, e| sum + e.amount }
+    expenses.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def paid_amount
-    payments.paid.inject(0) { |sum, e| sum + e.amount }
+    payments.paid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def unpaid_amount
-    payments.unpaid.inject(0) { |sum, e| sum + e.amount }
+    payments.unpaid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def collected_amount
-    collections.paid.inject(0) { |sum, e| sum + e.amount }
+    collections.paid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def uncollected_amount
-    collections.unpaid.inject(0) { |sum, e| sum + e.amount }
+    collections.unpaid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
 end
