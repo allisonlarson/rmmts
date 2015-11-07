@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable,
     :async, :recoverable, :rememberable, :trackable, :validatable, :lockable
   friendly_id :name, use: :slugged
+  monetize :credit_cents
 
   belongs_to :society
   has_many :accounts, dependent: :destroy
@@ -29,24 +30,31 @@ class User < ActiveRecord::Base
     accounts.first
   end
 
+  def full_credit?(amount)
+    credit >= amount
+  end
+
+  def total_owed
+    unpaid_amount - credit
+  end
+
   def expense_amount
-    expenses.inject(0) { |sum, e| sum + e.amount }
+    expenses.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def paid_amount
-    payments.paid.inject(0) { |sum, e| sum + e.amount }
+    payments.paid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def unpaid_amount
-    payments.unpaid.inject(0) { |sum, e| sum + e.amount }
+    payments.unpaid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def collected_amount
-    collections.paid.inject(0) { |sum, e| sum + e.amount }
+    collections.paid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
 
   def uncollected_amount
-    collections.unpaid.inject(0) { |sum, e| sum + e.amount }
+    collections.unpaid.inject(Money.new(0)) { |sum, e| sum + e.amount }
   end
-
 end

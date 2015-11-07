@@ -11,6 +11,7 @@ class ExpensesController < ApplicationController
     @expense = current_society.expenses.new(expenses_params.merge!(user_id: current_user.id))
     @expense.build_payments
     if @expense.save
+      @expense.credit_user
       redirect_to society_expenses_path(current_society)
     else
       render 'index'

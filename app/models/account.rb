@@ -16,7 +16,7 @@ class Account < ActiveRecord::Base
     payment_amount = payment_amount.format({symbol: false})
 
     response = HTTP.post("#{venmo_url}/payments", params: {
-      access_token: self.token,
+      token: self.token,
       user_id: uid,
       amount: payment_amount,
       note: "Paid roommate using RMMTS.",
