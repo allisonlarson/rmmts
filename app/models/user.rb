@@ -19,11 +19,19 @@ class User < ActiveRecord::Base
       response = default_account.make_payment(uid, payment_amount)
 
       if response == "settled"
-        payments.each(&:succeed!)
+        payments.each { |p| p.update_attributes!(paid_at: DateTime.now) }
       else
-        throw PaymentError
+        raise PaymentError
       end
     end
+  end
+
+  def pay_payment(payee, amount)
+    default_account.make_payment!(payee.uid, amount)
+  end
+
+  def uid
+    default_account.try(:uid)
   end
 
   def default_account

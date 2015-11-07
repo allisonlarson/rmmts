@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106220443) do
+ActiveRecord::Schema.define(version: 20151107212817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,11 @@ ActiveRecord::Schema.define(version: 20151106220443) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.integer "amount_cents", default: 0, null: false
-    t.integer "payee_id"
-    t.integer "payer_id"
-    t.integer "expense_id"
-    t.string  "state"
+    t.integer  "amount_cents", default: 0, null: false
+    t.integer  "payee_id"
+    t.integer  "payer_id"
+    t.integer  "expense_id"
+    t.datetime "paid_at"
   end
 
   create_table "societies", force: :cascade do |t|
