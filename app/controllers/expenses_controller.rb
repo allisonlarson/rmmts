@@ -3,8 +3,7 @@ class ExpensesController < ApplicationController
 
   def index
     @expense = current_society.expenses.new
-
-    @expenses = current_society.expenses
+    @expenses = Expense.where(society: current_society)
   end
 
   def create

@@ -21,6 +21,10 @@ class Expense < ActiveRecord::Base
     user.save!
   end
 
+  def paid_at
+    payments.order(:paid_at).last.paid_at
+  end
+
   private
 
   def payment_amount(amount)

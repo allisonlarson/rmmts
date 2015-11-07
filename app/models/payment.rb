@@ -6,25 +6,15 @@ class Payment < ActiveRecord::Base
 
   after_create :use_credit
 
-  scope :paid, -> { where(state: 'paid') }
-  scope :unpaid, -> { where.not(state: 'paid') }
+  scope :paid, -> { where.not(paid_at: nil) }
+  scope :unpaid, -> { where(paid_at: nil) }
 
   monetize :amount_cents
-
-  state_machine :state, :initial => :pending do
-    event :succeed do
-      transition :from => :pending, :to => :success
-    end
-
-    event :failed do
-      transition :from => :processing, :to => :failure
-    end
-  end
 
   def use_credit
     if payer.full_credit?(amount)
       payer.update_attributes!(credit: payer.credit - amount)
-      succeed!
+      update_attributes!(paid_at: DateTime.now)
     else
       update_attributes!(amount: amount - payer.credit)
       payer.update_attributes!(credit: 0)
@@ -32,14 +22,12 @@ class Payment < ActiveRecord::Base
   end
 
   def pay
-    response = account.make_payment!(payee.uid, amount)
+    response = payer.pay_payment(payee, amount)
 
     if response == "settled"
-      self.succeed!
-    elsif response == "failed"
-      self.failed!
+      update_attributes!(paid_at: DateTime.now)
     else
-      throw PaymentError
+      raise PaymentError
     end
   end
 end
