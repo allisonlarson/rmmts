@@ -16,6 +16,11 @@ class Expense < ActiveRecord::Base
     end
   end
 
+  def credit_user
+    user.credit += (amount - payment_amount(amount))
+    user.save!
+  end
+
   private
 
   def payment_amount(amount)
