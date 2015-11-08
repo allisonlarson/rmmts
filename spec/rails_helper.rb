@@ -21,14 +21,13 @@ OmniAuth.config.mock_auth[:venmo] = OmniAuth::AuthHash.new({
   provider: 'venmo',
   uid: '123545',
   info: {
-    balance: '0.0'
+    username: 'test-user',
   },
   credentials: {
     token: 'token'
   },
   extra: {
     raw_info: {
-      display_name: 'Test User',
       profile_picture_url: 'img.img'
     }
   }

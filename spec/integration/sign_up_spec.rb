@@ -18,7 +18,9 @@ RSpec.describe "User can sign-up", type: :feature do
       fill_in 'society[name]', with: 'test'
       click_on "Create Society"
 
-      expect(page).to have_content 'test@test.com'
+      within('.sidebar') do
+        expect(page).to have_content 'Test User'
+      end
     end
   end
 

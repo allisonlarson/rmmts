@@ -3,15 +3,19 @@
   <div class="main-content">
     <%= render "/shared/user_nav" %>
     <div class="content">
-      <a href="/auth/venmo" class="btn add-account-btn">Link Venmo Account</a>
+      <% if current_user.accounts.empty? %><a href="/auth/venmo" class="btn add-account-btn">Link Venmo Account</a><% end %>
       <div class="payment-accounts">
         <% current_user.accounts.each do |account| %>
           <div class="payment-account">
-            <h3 class="account-name"><%= account.provider %></h3>
             <table class="payment-account-table">
               <tr>
-                <td>Name</td>
-                <td>XXXX</td>
+                <th>Provider</th>
+                <th>Username</th>
+                <th></th>
+              </tr>
+              <tr>
+                <td><h3 class="account-name"><%= account.provider %></td>
+                <td><%= account.identifier %></td>
                 <td><%= link_to "Unlink", society_user_account_path(current_user, account), method: "DELETE", class:"btn" %></td>
               </tr>
             </table>
