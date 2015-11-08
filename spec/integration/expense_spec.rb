@@ -1,14 +1,13 @@
 require 'rails_helper'
 RSpec.describe "Expenses", type: :feature do
-  before do
-    @society = Society.create!(name: "Test")
-    @user = User.create!(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: @society)
-    @user2 = User.create!(name: "Other User", email: "other@test.com", password: "password", password_confirmation: "password", society: @society)
-  end
+  let(:society) { Society.create!(name: "Test") }
+  let!(:user) { User.create!(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: society) }
+  let!(:user2) { User.create!(name: "Other User", email: "other@test.com", password: "password", password_confirmation: "password", society: society) }
+  let(:expense) { Expense.create!(name: "Electricity", description: "All That Power", amount: 100, society: society, user: user) }
 
   context "existing expenses" do
     before do
-      Expense.create(name: "Electricity", description: "All That Power", amount: 100, society: @society, user: @user)
+      expense.build_payments && expense.save!
       visit '/'
       login
       click_on "Expenses"
