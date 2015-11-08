@@ -12,11 +12,17 @@ RSpec.describe "User can authorize account", type: :feature do
   end
 
   it "creates an account" do
-    expect(page).to have_content("Name")
+    within('.payment-account-table') do
+      expect(page).to have_content("venmo")
+      expect(page).to have_content("test-user")
+    end
+    expect(page).to_not have_content('Link Venmo Account')
   end
 
   it "deletes an account" do
     click_on "Unlink"
-    expect(page).to_not have_content("Name")
+    expect(page).to_not have_content("venmo")
+    expect(page).to_not have_content("test-user")
+    expect(page).to have_content('Link Venmo Account')
   end
 end

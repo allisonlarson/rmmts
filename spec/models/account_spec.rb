@@ -12,6 +12,9 @@ RSpec.describe Account do
     let(:omniauth_hash) { {
       provider: 'venmo',
       uid: '123545',
+      info: {
+        username: 'test-user',
+      },
       credentials: {
         token: 'token'
       },

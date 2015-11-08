@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
       account.provider = omniauth_hash[:provider]
       account.uid = omniauth_hash[:uid]
       account.token = omniauth_hash[:credentials][:token]
+      account.identifier = omniauth_hash[:info][:username]
       account.save
     end
   end
