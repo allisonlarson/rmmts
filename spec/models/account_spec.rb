@@ -18,6 +18,11 @@ RSpec.describe Account do
       credentials: {
         token: 'token'
       },
+      extra: {
+        raw_info: {
+          profile_picture_url: 'img.img'
+        }
+      }
     }}
 
     context "a new user" do
