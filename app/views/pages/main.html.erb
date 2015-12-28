@@ -11,7 +11,7 @@
   <div class="main-page">
     <div class="main-content-container">
       <h1 class="title">Rmmts</h1>
-      <%= form_tag "/society", method: "post" do %>
+      <%= form_tag "/search", method: "post" do %>
         <%= text_field_tag :society, nil, placeholder: "Enter the name of your society", class: "society-input"%>
         <%= submit_tag "Go", class:"btn go-btn" %>
       <% end %>

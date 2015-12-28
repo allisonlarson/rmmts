@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   def after_sign_in_path_for(resource)
     if current_society
-      society_user_path(current_society)
+      society_user_path(current_society, resource)
     else
       new_society_path
     end
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_update_path_for(resource)
-    society_user_path(current_society)
+    society_user_path(current_society, resource)
   end
 
   def current_society

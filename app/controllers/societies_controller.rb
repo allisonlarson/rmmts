@@ -10,7 +10,7 @@ class SocietiesController < ApplicationController
     if @society.save
       @society.invite(users, current_user) if users
       current_user.update_attributes!(society: @society)
-      redirect_to society_user_path(@society)
+      redirect_to society_user_path(@society, current_user)
     else
       render 'new'
     end

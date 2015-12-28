@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
   class PaymentError < StandardError; end
-  extend FriendlyId
   devise :invitable, :database_authenticatable, :registerable,
     :async, :recoverable, :rememberable, :trackable, :validatable, :lockable
-  friendly_id :name, use: :slugged
   monetize :credit_cents
 
   belongs_to :society

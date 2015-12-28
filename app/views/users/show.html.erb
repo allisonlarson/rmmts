@@ -16,7 +16,7 @@
               <tr>
                 <td><h3 class="account-name"><%= account.provider %></td>
                 <td><%= account.identifier %></td>
-                <td><%= link_to "Unlink", society_user_account_path(current_user, account), method: "DELETE", class:"btn" %></td>
+                <td><%= link_to "Unlink", society_user_account_path(current_society, current_user, account), method: "DELETE", class:"btn" %></td>
               </tr>
             </table>
           </div>
@@ -29,4 +29,3 @@
     </div>
   </div>
 </div>
-

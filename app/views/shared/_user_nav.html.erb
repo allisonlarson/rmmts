@@ -1,7 +1,7 @@
 <div class="nav">
   <ul class="tabs">
-    <li class="expenses"><%= link_to "Expenses", society_expenses_path, class: "nav-link" %></li>
+    <li class="expenses"><%= link_to "Expenses", society_expenses_path(current_society), class: "nav-link" %></li>
     <li class="payments"><%= link_to "Payments", society_user_payments_path(current_society, current_user), class: "nav-link" %></li>
-    <li class="account"><%= link_to "Account", society_user_path, class: "nav-link" %></li>
+    <li class="account"><%= link_to "Account", account_path, class: "nav-link" %></li>
   </ul>
 </div>
