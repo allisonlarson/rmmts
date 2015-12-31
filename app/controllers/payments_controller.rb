@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
   def pay
     @payment = current_user.payments.find(params[:payment_id])
     if @payment.pay
-      redirect_to 'index'
+      redirect_to society_user_payments_path
     else
       render 'index'
     end
