@@ -1,0 +1,9 @@
+language: ruby
+env:
+  - TOKEN_KEY='foo'
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate default
+before_script:
+  - psql -c 'create database rmmts_test' -U postgres
+
+
