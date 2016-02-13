@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.name || @user.email %>,</h1>
+    <p><%= @payee.name || @payee.email %> has requested a payment on RMMTS.</p>
+    <p>If you think this is in error, talk to them about it.</p>
+  </body>
+</html>
