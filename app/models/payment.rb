@@ -5,6 +5,7 @@ class Payment < ActiveRecord::Base
   belongs_to :expense
 
   after_create :use_credit
+  after_create :notify_user
 
   scope :paid, -> { where.not(paid_at: nil) }
   scope :unpaid, -> { where(paid_at: nil) }
@@ -19,6 +20,10 @@ class Payment < ActiveRecord::Base
       update_attributes!(amount: amount - payer.credit)
       payer.update_attributes!(credit: 0)
     end
+  end
+
+  def notify_user
+    PaymentMailer.delay.payment_notification_email(self)
   end
 
   def pay
