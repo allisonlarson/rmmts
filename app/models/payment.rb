@@ -14,11 +14,11 @@ class Payment < ActiveRecord::Base
 
   def use_credit
     if payer.full_credit?(amount)
-      payer.update_attributes!(credit: payer.credit - amount)
+      payer.credit!(-amount)
       update_attributes!(paid_at: DateTime.now)
     else
       update_attributes!(amount: amount - payer.credit)
-      payer.update_attributes!(credit: 0)
+      payer.reset_credit!
     end
   end
 

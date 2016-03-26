@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     self.update_attributes!(credit: self.credit += amount)
   end
 
+  def reset_credit!
+    self.update_attributes(credit: 0)
+  end
+
 
   def pay_payment(payee, amount)
     default_account.make_payment(payee.uid, amount)
