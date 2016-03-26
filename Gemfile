@@ -35,5 +35,6 @@ gem 'letter_opener', group: :development
 group :development, :test do
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'pry'
 end
 

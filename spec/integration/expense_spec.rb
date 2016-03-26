@@ -7,7 +7,8 @@ RSpec.describe "Expenses", type: :feature do
 
   context "existing expenses" do
     before do
-      expense.build_payments && expense.save!
+      Builders::Expense.new(expense).build_payments_from_expense
+      expense.save!
       visit '/'
       login
       click_on "Expenses"
