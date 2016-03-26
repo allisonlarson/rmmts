@@ -8,7 +8,8 @@ RSpec.describe "Payments", type: :feature do
 
   context "singular payment" do
     before do
-      expense.build_payments && expense.save!
+      Builders::Expense.new(expense).build_payments_from_expense
+      expense.save!
       visit '/'
       login
       click_on "Payments"

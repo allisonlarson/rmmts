@@ -8,7 +8,8 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = current_society.expenses.new(expenses_params.merge!(user_id: current_user.id))
-    @expense.build_payments
+    Builders::Expense.new(@expense).build_payments_from_expense
+
     if @expense.save
       @expense.credit_user
       redirect_to society_expenses_path(current_society)
