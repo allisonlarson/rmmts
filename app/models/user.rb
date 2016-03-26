@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :payments, class_name: 'Payment', foreign_key: 'payer_id'
   has_many :collections, class_name: 'Payment', foreign_key: 'payee_id'
 
-  def pay
+  def pay_all
     payments.unpaid.group_by(&:payee_id).each do |user_id, payments|
       uid = User.find(user_id).accounts.first.uid
       payment_amount = payments.inject(0) { |sum, e| sum + e.amount }

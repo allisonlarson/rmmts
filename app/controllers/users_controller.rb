@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def pay
-    if current_user.pay
+    if current_user.pay_all
       redirect_to 'show'
     else
       render 'show'
