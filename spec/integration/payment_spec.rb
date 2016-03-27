@@ -11,22 +11,43 @@ RSpec.describe "Payments", type: :feature do
       Builders::Expense.new(expense).build_payments_from_expense
       expense.save!
       visit '/'
-      login
-      click_on "Payments"
     end
 
-    it "can pay payment" do
-      expect_any_instance_of(Account).to receive(:make_payment).and_return("settled")
-
-      within(".payments-table") do
-        expect(page).to_not have_content(DateTime.now.strftime("%m/%d/%Y"))
-        expect(page).to have_link("Pay")
+    context "that must be paid" do
+      before do
+        login(user.email)
+        click_on "Payments"
       end
 
-      click_on "Pay"
-      within(".payments-table") do
-        expect(page).to have_content(DateTime.now.strftime("%m/%d/%Y"))
-        expect(page).to_not have_link("Pay")
+      it "can pay payment" do
+        expect_any_instance_of(Account).to receive(:make_payment).and_return("settled")
+
+        within(".payments-table") do
+          expect(page).to_not have_content(DateTime.now.strftime("%m/%d/%Y"))
+          expect(page).to have_link("Pay")
+        end
+
+        click_on "Pay"
+        within(".payments-table") do
+          expect(page).to have_content(DateTime.now.strftime("%m/%d/%Y"))
+          expect(page).to_not have_link("Pay")
+        end
+      end
+    end
+
+    context "that must be collected" do
+      before do
+        login(user2.email)
+        click_on "Payments"
+      end
+
+      it "can mark requested payment as paid" do
+        click_on "Mark as Paid"
+
+        within(".collections-table") do
+          expect(page).to have_content(DateTime.now.strftime("%m/%d/%Y"))
+          expect(page).to_not have_link("Mark as Paid")
+        end
       end
     end
   end

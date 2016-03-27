@@ -11,6 +11,10 @@ class Payment < ActiveRecord::Base
 
   monetize :amount_cents
 
+  def mark_paid
+    update_attributes!(paid_at: DateTime.now)
+  end
+
   def notify_user
     PaymentMailer.delay.payment_notification_email(self)
   end
