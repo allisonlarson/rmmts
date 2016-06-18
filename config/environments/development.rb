@@ -9,6 +9,22 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  OmniAuth.config.mock_auth[:venmo] = OmniAuth::AuthHash.new({
+    provider: 'venmo',
+    uid: '145434160922624933',
+    info: {
+      username: 'test-user',
+    },
+    credentials: {
+      token: 'token'
+    },
+    extra: {
+      raw_info: {
+        profile_picture_url: 'img.img'
+      }
+    }
+  })
+  OmniAuth.config.test_mode = true
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

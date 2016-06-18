@@ -13,7 +13,6 @@ class Account < ActiveRecord::Base
   end
 
   def make_payment(uid, payment_amount)
-    uid = "145434160922624933" if !Rails.env.production?
     payment_amount = payment_amount.format({symbol: false})
     response = HTTP.post("#{ENV['VENMO_API']}/payments", params: {
       access_token: self.token,

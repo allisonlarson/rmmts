@@ -19,7 +19,7 @@ end
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:venmo] = OmniAuth::AuthHash.new({
   provider: 'venmo',
-  uid: '123545',
+  uid: '145434160922624933',
   info: {
     username: 'test-user',
   },
