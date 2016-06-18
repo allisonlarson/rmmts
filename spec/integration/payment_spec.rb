@@ -4,7 +4,7 @@ RSpec.describe "Payments", type: :feature do
   let!(:user) { User.create!(name: "Test User", email: "test@test.com", password: "password", password_confirmation: "password", society: society) }
   let!(:user2) { User.create!(name: "Other User", email: "other@test.com", password: "password", password_confirmation: "password", society: society) }
   let(:expense) { Expense.create!(name: "Electricity", description: "All That Power", amount: 100, society: society, user: user2) }
-  let!(:account) { Account.create!(provider: "test", uid: "1234", token: "1234", user: user) }
+  let!(:account) { Account.create!(provider: "test", uid: "145434160922624933", token: "1234", user: user) }
 
   context "singular payment" do
     before do

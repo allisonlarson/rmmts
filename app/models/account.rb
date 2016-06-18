@@ -13,11 +13,8 @@ class Account < ActiveRecord::Base
   end
 
   def make_payment(uid, payment_amount)
-    venmo_url = ENV['VENMO_API'] || "https://sandbox-api.venmo.com/v1"
-    uid = "145434160922624933" if !Rails.env.production?
     payment_amount = payment_amount.format({symbol: false})
-
-    response = HTTP.post("#{venmo_url}/payments", params: {
+    response = HTTP.post("#{ENV['VENMO_API']}/payments", params: {
       access_token: self.token,
       user_id: uid,
       amount: payment_amount,

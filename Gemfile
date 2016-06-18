@@ -33,6 +33,7 @@ gem 'daemons'
 gem 'letter_opener', group: :development
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'pry'
