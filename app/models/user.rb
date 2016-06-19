@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def pay_payment(payee, amount)
     default_account.make_payment(payee.uid, amount)
   end

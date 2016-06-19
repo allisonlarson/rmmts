@@ -41,6 +41,9 @@
             <td><%= collection.amount %></td>
             <td><%= collection.payer.name %></td>
             <td><%= collection.paid_at.try(:strftime, "%m/%d/%Y %l:%M %p") %></td>
+            <td><% if !collection.paid_at %>
+              <%= link_to "Mark as Paid", society_user_payment_path(id: collection.id, payment: { paid: 1 }), method: "PATCH", class: "btn" %>
+            <% end %></td>
           </tr>
         <% end %>
       </table>

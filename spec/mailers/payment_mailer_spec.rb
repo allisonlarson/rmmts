@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe PaymentMailer do
   describe "#payment_notification_email" do
     let(:payee) { User.create!(email: "test@example.com", password: "password", name: "Test")}
-    let(:payer) { User.create!(email: "test2@example.com", password: "password", name: "Other", credit_cents: 500)}
+    let(:payer) { User.create!(email: "test2@example.com", password: "password", name: "Other")}
     let(:payment) { Payment.create!(payer: payer, payee: payee, amount_cents: 100) }
     let(:mail) { PaymentMailer.payment_notification_email(payment) }
 
