@@ -15,6 +15,7 @@ class Payment < ActiveRecord::Base
   def use_credit
     if payer.full_credit?(amount)
       payer.credit!(-amount)
+      payee.credit!(amount)
       update_attributes!(paid_at: DateTime.now)
     else
       update_attributes!(amount: amount - payer.credit)
