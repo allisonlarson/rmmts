@@ -7,38 +7,4 @@ RSpec.describe User, type: :model do
   it { should validate_uniqueness_of(:email) }
   it { should have_many(:payments).with_foreign_key(:payer_id) }
   it { should have_many(:collections).class_name('Payment').with_foreign_key(:payee_id) }
-
-  describe "#full_credit?" do
-    let(:user) { User.create!(email: "test@example.com", password: "password", credit_cents: 100) }
-
-    context "with full credit" do
-      it "returns true" do
-        expect(user.full_credit?(Money.new(100))).to eq(true)
-      end
-    end
-
-    context "without full credit" do
-      it "returns false" do
-        expect(user.full_credit?(Money.new(200))).to eq(false)
-      end
-    end
-  end
-
-  describe "#credit!" do
-    let(:user) { User.create!(email: "test@example.com", password: "password", credit_cents: 100) }
-
-    context "with positive amount" do
-      it "updates the credit" do
-        user.credit!(Money.new(100))
-        expect(user.credit).to eq(Money.new(200))
-      end
-    end
-
-    context "with negative amount" do
-      it "updates the credit" do
-        user.credit!(Money.new(-100))
-        expect(user.credit).to eq(0)
-      end
-    end
-  end
 end

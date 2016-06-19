@@ -3,8 +3,8 @@
     <img class="account-photo" src=<%= current_user.image %> alt="profile_picture">
     <p><%= current_user.name %></p>
     <div class="balance">
-      <div class="balance-header">total owed</div>
-      <h2 class="balance-amt"><%= current_user.total_owed %></h2>
+      <div class="balance-header unpaid">unpaid amount</div>
+      <h2 class="balance-amt"><%= current_user.unpaid_amount %></h2>
       <%= link_to "Pay Now", society_user_pay_path, method: "POST", class: "btn pay-now-btn" %>
     </div>
     <%= link_to "Invite Users", new_user_invitation_path, class: "btn" %>
