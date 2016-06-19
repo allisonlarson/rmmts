@@ -21,7 +21,7 @@
             <td><%= payment.payee.name %></td>
             <td><%= payment.paid_at.try(:strftime, "%m/%d/%Y %l:%M %p") %></td>
             <td><% if !payment.paid_at %>
-              <%= link_to "Pay", society_user_payment_pay_path(payment_id: payment.id), method: "POST", class: "btn" %>
+              <%= link_to "Pay", society_user_payment_pay_path(payment_id: payment.id), method: "POST", class: "btn pay-button" %>
             <% end %></td>
         </tr>
       <% end %>
