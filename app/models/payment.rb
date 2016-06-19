@@ -30,6 +30,7 @@ class Payment < ActiveRecord::Base
     response = payer.pay_payment(payee, amount)
 
     if response == "settled"
+      payee.credit!(amount)
       update_attributes!(paid_at: DateTime.now)
     else
       raise PaymentError
