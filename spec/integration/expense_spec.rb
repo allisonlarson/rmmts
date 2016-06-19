@@ -38,12 +38,6 @@ RSpec.describe "Expenses", type: :feature do
         expect(page).to have_content("A Series of Tubes")
         expect(page).to have_content("50")
       end
-
-      it "shows total owed of expense" do
-        within('.balance') do
-          expect(page).to have_content("-25.00")
-        end
-      end
     end
 
     context "the requested user" do

@@ -4,12 +4,6 @@ class Expense < ActiveRecord::Base
   has_many :payments
   monetize :amount_cents
 
-  def credit_user
-    credit_amount = amount - payment_amount(amount)
-
-    user.credit!(credit_amount)
-  end
-
   def paid_at
     payments.order(:paid_at).last.paid_at
   end

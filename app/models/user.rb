@@ -26,14 +26,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def credit!(amount)
-    self.update_attributes!(credit: self.credit += amount)
-  end
-
-  def reset_credit!
-    self.update_attributes(credit: 0)
-  end
-
 
   def pay_payment(payee, amount)
     default_account.make_payment(payee.uid, amount)
@@ -47,12 +39,8 @@ class User < ActiveRecord::Base
     accounts.first
   end
 
-  def full_credit?(amount)
-    credit >= amount
-  end
-
   def total_owed
-    unpaid_amount - credit
+    unpaid_amount
   end
 
   def expense_amount

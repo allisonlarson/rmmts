@@ -11,7 +11,6 @@ class ExpensesController < ApplicationController
     Builders::Expense.new(@expense).build_payments_from_expense
 
     if @expense.save
-      @expense.credit_user
       redirect_to society_expenses_path(current_society)
     else
       render 'index'
